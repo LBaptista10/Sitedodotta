@@ -1,11 +1,11 @@
-NOVA VERSÃO VISUAL DO SITE DOTTA
+NOVA VERSÃO DOTTA — FUNDO BRANCO
 
-Alterações:
-- Página muito mais simples.
-- Fundo azul com detalhes vermelhos.
-- Cabeçalho somente com a logo.
-- Frase principal: "reserve, jogue e viva o lance".
-- Apenas um botão de reserva.
-- Botão discreto de área administrativa no canto superior direito.
-- Modal simples para escolher Society ou Futsal.
-- Letras mais despojadas.
+Principais mudanças:
+- Fundo branco em todo o site.
+- Visual mais profissional e esportivo.
+- Tipografia forte e moderna.
+- Cards separados para Society e Futsal.
+- Reserva abre em uma nova tela.
+- Agenda com horários livres, reservados e mensalistas.
+- Botão discreto para a área administrativa.
+- Área para o link das gravações dos lances.
