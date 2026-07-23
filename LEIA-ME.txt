@@ -1,21 +1,26 @@
-DOTTA — Painel administrativo V1
+SITE DOTTA — NOVO VISUAL
 
-Abra o arquivo index.html para testar.
+ARQUIVOS
+- index.html
+- logo-dotta.png
 
-Senha administrativa: 210898
+COMO PUBLICAR
+1. Extraia o ZIP.
+2. No repositório Sitedodotta do GitHub, substitua o index.html antigo por este.
+3. Envie também logo-dotta.png para a raiz do repositório.
+4. Confirme o commit. A Vercel deve atualizar automaticamente.
 
-Recursos desta versão:
-- Reserva de Society ou Futsal.
-- Valor da locação: R$ 140,00.
-- Aviso de cancelamento com 48 horas.
-- Lista opcional de jogadores.
-- Controle individual de R$ 15,00 por jogador.
-- Controle de coletes e bola.
-- Calendário administrativo com quantidade de jogos por dia.
-- Alerta de cancelamento fora do prazo.
-- Botão flutuante azul de WhatsApp sem número definido.
-- Dados de demonstração salvos no navegador (localStorage).
+O QUE JÁ FUNCIONA
+- Layout responsivo para celular.
+- Logo centralizada.
+- Botões Reservar agora e Serviços.
+- Modal com os serviços.
+- Seleção Society/Futsal.
+- Data, horário, nome, telefone e observações.
+- Validação visual do formulário.
+- Link Seus lances para o GravaJogo.
 
-Importante:
-Esta é uma versão de demonstração local. Para vários aparelhos compartilharem a mesma agenda,
-a próxima etapa é conectar o projeto ao Supabase.
+IMPORTANTE
+Esta versão é um protótipo visual funcional no navegador.
+O banco de dados, disponibilidade real dos horários, painel administrativo
+e envio definitivo da reserva serão conectados em uma próxima etapa.

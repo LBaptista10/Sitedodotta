@@ -1,183 +1,899 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dotta Ginásio de Esportes</title>
-<style>
-:root{--navy:#102f5d;--red:#c92832;--blue:#1677d2;--light:#f5f7fb;--green:#1b9a59;--muted:#6d7786;--border:#dce2eb}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,sans-serif;background:#fff;color:var(--navy)}
-button,input,select{font:inherit}button{cursor:pointer}
-.container{width:min(1040px,calc(100% - 32px));margin:auto}
-.topbar{display:flex;justify-content:flex-end;padding:16px 0}
-.admin-open{border:1px solid var(--border);background:#fff;color:var(--navy);padding:10px 14px;border-radius:12px;font-weight:800}
-.hero{text-align:center;padding:12px 0 36px;background:linear-gradient(180deg,#fff,#f8faff)}
-.logo-badge{width:145px;height:145px;margin:auto;border:7px solid var(--red);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 10px 30px #102f5d18;background:#fff}
-.logo-badge b{font-size:30px}.logo-badge small{font-size:10px;font-weight:800}.ball{font-size:32px}
-h1{font-size:clamp(38px,8vw,64px);line-height:.95;margin:22px 0 12px}h1 span{color:var(--red)}
-.subtitle{color:var(--muted);margin:0 0 24px}
-.btn{border:0;border-radius:14px;padding:14px 20px;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
-.btn-red{background:var(--red);color:#fff}.btn-outline{background:#fff;color:var(--navy);border:1px solid var(--border)}
-.section{padding:48px 0}.section h2{font-size:30px;margin:0 0 8px}.section-head p{color:var(--muted);margin-top:0}
-.booking-card,.admin-card,.calendar-card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:20px;box-shadow:0 12px 35px #102f5d0c}
-.modes{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mode{border:2px solid var(--border);border-radius:16px;padding:16px;background:#fff;text-align:left}.mode.active{border-color:var(--red);background:#fff7f7}.court{font-size:30px}.mode strong{display:block;margin-top:4px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}
-label{font-weight:800}input,select{width:100%;border:1px solid var(--border);border-radius:12px;padding:13px;background:#fff;color:var(--navy)}
-.price-box{margin-top:18px;padding:16px;border-radius:16px;background:var(--light);display:flex;justify-content:space-between;gap:12px;align-items:center}.price-box strong{font-size:24px}.price-box small{display:block;color:var(--muted);margin-top:3px}
-.players-box{margin-top:16px;padding:16px;border:1px dashed #b9c5d5;border-radius:16px}.players-list{display:grid;gap:8px;margin-top:12px}.player-entry{display:flex;gap:8px}.player-entry input{flex:1}.mini-btn{border:0;border-radius:10px;padding:10px 12px;font-weight:800}.add{background:#e9f2ff;color:var(--blue)}.remove{background:#fff0f0;color:var(--red)}
-.notice{font-size:13px;color:var(--muted);margin:12px 0}.submit{width:100%;margin-top:18px}
-.lances{background:var(--navy);color:#fff;border-radius:22px;padding:24px;display:flex;justify-content:space-between;align-items:center;gap:20px}.lances p{color:#dce5f2}
-.whatsapp{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#1689e9;color:#fff;text-decoration:none;font-size:29px;box-shadow:0 12px 28px #0003;z-index:40}
-dialog{border:0;padding:0;border-radius:22px;width:min(1100px,95vw);max-height:92vh;color:var(--navy)}dialog::backdrop{background:#07182bbb}.modal-inner{padding:22px}.close{float:right;border:0;background:#eef2f7;border-radius:50%;width:38px;height:38px;font-size:22px}
-.login{max-width:380px;margin:60px auto;text-align:center}.hidden{display:none!important}
-.admin-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;clear:both}.admin-title{margin:5px 0 20px}
-.calendar-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.calendar-head button{border:0;background:var(--light);border-radius:10px;padding:9px 12px}
-.week,.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.week div{text-align:center;font-size:12px;color:var(--muted);font-weight:800;padding:5px}
-.day{min-height:78px;border:1px solid var(--border);border-radius:12px;background:#fff;padding:8px;text-align:left}.day.other{opacity:.35}.day.today{border-color:var(--red)}.day.selected{background:#eef5ff;border-color:var(--blue)}.day-number{font-weight:900}.game-count{font-size:11px;color:#fff;background:var(--red);border-radius:20px;padding:4px 7px;display:inline-block;margin-top:8px}
-.day-summary{margin-top:16px}.reservation{border:1px solid var(--border);border-radius:15px;padding:14px;margin:10px 0}.reservation h4{margin:0 0 5px}.meta{color:var(--muted);font-size:13px}.tag{display:inline-block;border-radius:20px;padding:5px 8px;font-size:12px;font-weight:800;background:#eef2f7;margin:6px 4px 0 0}
-.materials{display:flex;gap:10px;margin:12px 0}.check-btn{border:1px solid var(--border);background:#fff;border-radius:12px;padding:9px 11px;font-weight:800}.check-btn.on{background:#eaf8f0;border-color:#8ed2ae;color:var(--green)}
-.pay-list{margin-top:12px}.pay-row{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #edf0f4;padding:9px 0}.paid-mark{border:0;border-radius:50%;width:30px;height:30px;background:#edf1f5}.paid-mark.on{background:var(--green);color:#fff}
-.totals{background:var(--light);border-radius:13px;padding:12px;margin-top:10px;font-size:14px;line-height:1.7}.alert-btn{background:#fff4d7;color:#8a5c00;border:1px solid #f1d88c}.alerted{background:#fff0f0;color:var(--red);border-color:#f1b4b8}
-.empty{color:var(--muted);padding:24px;text-align:center}
-@media(max-width:780px){.admin-layout{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.day{min-height:62px;padding:5px}.game-count{font-size:9px;padding:3px 5px}.lances{flex-direction:column;align-items:flex-start}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="Reserve sua quadra no Dotta Ginásio de Esportes." />
+  <title>Dotta Ginásio de Esportes</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --azul: #0c3769;
+      --azul-2: #174f8d;
+      --vermelho: #e52532;
+      --vermelho-escuro: #bd1722;
+      --texto: #253043;
+      --cinza: #70798a;
+      --linha: #e8ebf0;
+      --fundo-suave: #f7f9fc;
+      --branco: #ffffff;
+      --sombra: 0 18px 50px rgba(12, 55, 105, .12);
+      --raio: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "DM Sans", sans-serif;
+      color: var(--texto);
+      background: var(--branco);
+      overflow-x: hidden;
+    }
+
+    button, input, select, textarea { font: inherit; }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .decoracao {
+      position: fixed;
+      z-index: -2;
+      pointer-events: none;
+      opacity: .98;
+    }
+
+    .decoracao.topo-esquerdo {
+      width: 250px;
+      height: 115px;
+      top: -35px;
+      left: -70px;
+      border-radius: 0 0 100% 0;
+      background:
+        radial-gradient(ellipse at 30% 40%, transparent 53%, var(--vermelho) 54% 65%, transparent 66%),
+        radial-gradient(ellipse at 25% 30%, transparent 49%, var(--azul) 50% 66%, transparent 67%);
+      transform: rotate(-5deg);
+    }
+
+    .decoracao.topo-direito {
+      width: 220px;
+      height: 110px;
+      top: -40px;
+      right: -75px;
+      border-radius: 0 0 0 100%;
+      background:
+        radial-gradient(ellipse at 70% 40%, transparent 53%, var(--azul) 54% 65%, transparent 66%),
+        radial-gradient(ellipse at 75% 30%, transparent 49%, var(--vermelho) 50% 66%, transparent 67%);
+      transform: rotate(7deg);
+    }
+
+    .decoracao.base-esquerda {
+      width: 230px;
+      height: 115px;
+      bottom: -35px;
+      left: -75px;
+      border-radius: 0 100% 0 0;
+      background:
+        radial-gradient(ellipse at 30% 70%, transparent 53%, var(--azul) 54% 65%, transparent 66%),
+        radial-gradient(ellipse at 25% 75%, transparent 49%, var(--vermelho) 50% 66%, transparent 67%);
+      transform: rotate(7deg);
+    }
+
+    .barra-topo {
+      min-height: 76px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 16px clamp(18px, 4vw, 54px);
+      border-bottom: 1px solid rgba(12, 55, 105, .08);
+      background: rgba(255,255,255,.84);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .admin {
+      width: 48px;
+      height: 48px;
+      border: 1px solid #dfe5ec;
+      border-radius: 16px;
+      background: #fff;
+      display: grid;
+      place-items: center;
+      color: var(--azul);
+      cursor: pointer;
+      transition: .2s ease;
+      box-shadow: 0 8px 22px rgba(12,55,105,.07);
+    }
+
+    .admin:hover { transform: translateY(-2px); }
+
+    main {
+      width: min(100%, 880px);
+      margin: 0 auto;
+      padding: 0 20px 70px;
+    }
+
+    .hero {
+      min-height: 690px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 50px 0 72px;
+    }
+
+    .logo {
+      width: clamp(190px, 35vw, 285px);
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 14px 22px rgba(12,55,105,.12));
+      margin-bottom: 28px;
+    }
+
+    .chamada {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.6rem, 8vw, 5rem);
+      line-height: .98;
+      letter-spacing: -.04em;
+      margin: 0;
+      color: var(--azul);
+      max-width: 760px;
+    }
+
+    .chamada em {
+      font-style: italic;
+      color: var(--azul-2);
+    }
+
+    .subtitulo {
+      margin: 24px auto 0;
+      max-width: 590px;
+      color: var(--cinza);
+      font-size: clamp(1rem, 3vw, 1.18rem);
+      line-height: 1.7;
+    }
+
+    .acoes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .botao {
+      min-width: 190px;
+      border: 0;
+      border-radius: 16px;
+      padding: 16px 26px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .botao:hover { transform: translateY(-2px); }
+
+    .botao.vermelho {
+      background: linear-gradient(135deg, var(--vermelho), var(--vermelho-escuro));
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(229,37,50,.25);
+    }
+
+    .botao.vermelho:hover { box-shadow: 0 17px 34px rgba(229,37,50,.33); }
+
+    .seta-baixo {
+      margin-top: 55px;
+      color: var(--azul);
+      opacity: .65;
+      animation: flutuar 1.8s ease-in-out infinite;
+    }
+
+    @keyframes flutuar {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+
+    .secao {
+      scroll-margin-top: 95px;
+      margin: 20px 0 64px;
+    }
+
+    .titulo-secao {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .titulo-secao span {
+      color: var(--vermelho);
+      text-transform: uppercase;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+    }
+
+    .titulo-secao h2 {
+      margin: 8px 0 8px;
+      font-family: "Playfair Display", serif;
+      color: var(--azul);
+      font-size: clamp(2rem, 6vw, 3rem);
+      letter-spacing: -.03em;
+    }
+
+    .titulo-secao p {
+      margin: 0 auto;
+      color: var(--cinza);
+      line-height: 1.6;
+      max-width: 580px;
+    }
+
+    .painel {
+      border: 1px solid var(--linha);
+      border-radius: var(--raio);
+      padding: clamp(20px, 5vw, 34px);
+      background: rgba(255,255,255,.98);
+      box-shadow: var(--sombra);
+    }
+
+    .etapa {
+      margin-bottom: 28px;
+    }
+
+    .etapa:last-child { margin-bottom: 0; }
+
+    .rotulo {
+      display: block;
+      margin-bottom: 12px;
+      font-weight: 800;
+      color: var(--azul);
+      font-size: 1rem;
+    }
+
+    .opcoes-quadra {
+      display: grid;
+      gap: 13px;
+    }
+
+    .opcao {
+      position: relative;
+    }
+
+    .opcao input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .opcao label {
+      display: grid;
+      grid-template-columns: 74px 1fr 26px;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 15px;
+      border: 1.5px solid #dfe5ec;
+      border-radius: 18px;
+      background: #fff;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .opcao label:hover {
+      border-color: rgba(12,55,105,.35);
+      transform: translateY(-1px);
+    }
+
+    .opcao input:checked + label {
+      border-color: var(--azul);
+      background: #f7faff;
+      box-shadow: 0 0 0 4px rgba(12,55,105,.08);
+    }
+
+    .mini-quadra {
+      width: 74px;
+      height: 49px;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.75);
+    }
+
+    .mini-quadra.society {
+      background:
+        linear-gradient(90deg, transparent 48%, rgba(255,255,255,.9) 49% 51%, transparent 52%),
+        repeating-linear-gradient(90deg, #2f8b4d 0 14px, #267e45 14px 28px);
+    }
+
+    .mini-quadra.futsal {
+      background:
+        linear-gradient(90deg, transparent 48%, rgba(255,255,255,.85) 49% 51%, transparent 52%),
+        #a66d42;
+    }
+
+    .mini-quadra::before {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border: 1.5px solid rgba(255,255,255,.9);
+      border-radius: 5px;
+    }
+
+    .mini-quadra::after {
+      content: "";
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border: 1.5px solid rgba(255,255,255,.9);
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+
+    .nome-opcao strong {
+      display: block;
+      color: var(--azul);
+      font-size: 1.06rem;
+    }
+
+    .nome-opcao small { color: var(--cinza); }
+
+    .radio-visual {
+      width: 22px;
+      height: 22px;
+      border: 2px solid #b8c2cf;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .opcao input:checked + label .radio-visual {
+      border-color: var(--vermelho);
+    }
+
+    .opcao input:checked + label .radio-visual::after {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      background: var(--vermelho);
+      border-radius: 50%;
+    }
+
+    .campos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .campo { min-width: 0; }
+
+    .campo.full { grid-column: 1 / -1; }
+
+    .campo label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: .92rem;
+      font-weight: 700;
+      color: #38445a;
+    }
+
+    .campo input,
+    .campo select,
+    .campo textarea {
+      width: 100%;
+      border: 1.5px solid #dfe5ec;
+      border-radius: 14px;
+      padding: 14px 15px;
+      color: var(--texto);
+      background: #fff;
+      outline: none;
+      transition: .2s ease;
+    }
+
+    .campo input:focus,
+    .campo select:focus,
+    .campo textarea:focus {
+      border-color: var(--azul);
+      box-shadow: 0 0 0 4px rgba(12,55,105,.08);
+    }
+
+    .campo textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .confirmar {
+      width: 100%;
+      margin-top: 18px;
+    }
+
+    .lances {
+      background:
+        linear-gradient(135deg, rgba(12,55,105,.98), rgba(20,74,132,.98));
+      color: #fff;
+      border-radius: 28px;
+      padding: clamp(28px, 6vw, 48px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 22px 55px rgba(12,55,105,.22);
+    }
+
+    .lances::before,
+    .lances::after {
+      content: "";
+      position: absolute;
+      width: 160px;
+      height: 28px;
+      border-radius: 50%;
+      border: 10px solid var(--vermelho);
+      opacity: .9;
+    }
+
+    .lances::before {
+      left: -72px;
+      top: 26px;
+      transform: rotate(-18deg);
+    }
+
+    .lances::after {
+      right: -65px;
+      bottom: 22px;
+      transform: rotate(20deg);
+    }
+
+    .lances h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 6vw, 3rem);
+      margin: 0 0 10px;
+    }
+
+    .lances p {
+      margin: 0 auto 24px;
+      max-width: 520px;
+      color: rgba(255,255,255,.8);
+      line-height: 1.6;
+    }
+
+    .lances .botao {
+      background: var(--vermelho);
+      color: #fff;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer {
+      text-align: center;
+      color: #8a93a2;
+      padding: 12px 20px 36px;
+      font-size: .88rem;
+    }
+
+    .modal-fundo {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(8,23,42,.56);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(7px);
+    }
+
+    .modal-fundo.aberto { display: flex; }
+
+    .modal {
+      width: min(100%, 500px);
+      background: #fff;
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.25);
+      animation: subir .23s ease-out;
+    }
+
+    @keyframes subir {
+      from { transform: translateY(15px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-topo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 18px;
+    }
+
+    .modal h3 {
+      margin: 0;
+      color: var(--azul);
+      font-family: "Playfair Display", serif;
+      font-size: 1.8rem;
+    }
+
+    .fechar {
+      border: 0;
+      background: #f0f3f7;
+      width: 40px;
+      height: 40px;
+      border-radius: 13px;
+      cursor: pointer;
+      color: var(--azul);
+      font-size: 1.2rem;
+    }
+
+    .lista-servicos {
+      display: grid;
+      gap: 11px;
+    }
+
+    .servico {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid var(--linha);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .servico-icone {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: #f3f6fa;
+      font-size: 1.3rem;
+    }
+
+    .servico strong {
+      display: block;
+      color: var(--azul);
+    }
+
+    .servico small { color: var(--cinza); }
+
+    .aviso {
+      display: none;
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 13px;
+      background: #fff4f4;
+      color: #a51d28;
+      font-size: .9rem;
+    }
+
+    .aviso.visivel { display: block; }
+
+    .valor-locacao {
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      padding:16px 18px;border:1px solid var(--linha);border-radius:16px;background:var(--fundo-suave);
+    }
+    .valor-locacao strong,.valor-locacao small{display:block}.valor-locacao strong{color:var(--azul)}
+    .valor-locacao small{margin-top:4px;color:var(--cinza)}.valor-locacao b{font-size:1.35rem;color:var(--azul);white-space:nowrap}
+    .botao-jogadores,.adicionar-jogador{border:0;border-radius:14px;padding:13px 16px;font-weight:800;cursor:pointer}
+    .botao-jogadores{width:100%;background:#eef4fb;color:var(--azul)}.adicionar-jogador{background:#f2f5f8;color:var(--azul);margin-top:10px}
+    .area-jogadores{margin-top:12px;padding:14px;border:1px dashed #cfd8e5;border-radius:16px}.oculto{display:none!important}
+    .linha-jogador{display:flex;gap:8px;margin-bottom:8px}.linha-jogador input{flex:1}.remover-jogador{border:0;border-radius:12px;background:#fff0f1;color:var(--vermelho);width:44px;font-weight:800}
+    .whatsapp-flutuante{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;background:#1688e8;color:#fff;display:grid;place-items:center;z-index:50;box-shadow:0 14px 30px rgba(0,0,0,.22);text-decoration:none;font-size:1.7rem}
+    .modal.admin-modal{width:min(96vw,1120px);max-height:90vh;overflow:auto}.admin-login{max-width:380px;margin:20px auto;text-align:center}.admin-login .logo-admin{width:105px;margin-bottom:12px}
+    .admin-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.calendario-box,.reservas-box{border:1px solid var(--linha);border-radius:20px;padding:18px;background:#fff}
+    .calendario-topo{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.calendario-topo button{border:0;background:#f0f4f8;color:var(--azul);border-radius:12px;padding:9px 13px;cursor:pointer}.calendario-topo h4{margin:0;color:var(--azul);text-transform:capitalize}
+    .semana,.grade-calendario{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.semana span{text-align:center;color:var(--cinza);font-size:.72rem;font-weight:800;padding:4px}
+    .dia-calendario{min-height:78px;border:1px solid var(--linha);border-radius:13px;background:#fff;padding:8px;text-align:left;cursor:pointer;color:var(--texto)}.dia-calendario.fora{opacity:.35}.dia-calendario.hoje{border-color:var(--vermelho)}.dia-calendario.selecionado{background:#f1f6fc;border-color:var(--azul)}
+    .numero-dia{display:block;font-weight:800;color:var(--azul)}.contador-jogos{display:inline-block;margin-top:8px;background:var(--vermelho);color:#fff;border-radius:20px;padding:4px 7px;font-size:.68rem;font-weight:800}
+    .reserva-admin{border:1px solid var(--linha);border-radius:16px;padding:14px;margin-top:10px}.reserva-admin h5{margin:0 0 5px;color:var(--azul);font-size:1rem}.meta-admin{font-size:.85rem;color:var(--cinza)}.tag-admin{display:inline-block;margin:7px 5px 0 0;padding:5px 8px;border-radius:20px;background:#f0f3f7;font-size:.75rem;font-weight:700}
+    .materiais{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}.check-material,.alerta-cliente{border:1px solid var(--linha);border-radius:12px;padding:9px 11px;background:#fff;font-weight:800;cursor:pointer}.check-material.ativo{background:#eaf8f0;border-color:#9ad4b5;color:#18864c}.alerta-cliente{background:#fff7df;color:#8b6500}.alerta-cliente.ativo{background:#fff0f1;color:var(--vermelho);border-color:#f0b8bd}
+    .pagamento-linha{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #edf0f4;padding:9px 0}.pago-btn{width:31px;height:31px;border:0;border-radius:50%;background:#eef1f5;cursor:pointer;font-weight:800}.pago-btn.ativo{background:#1d9b59;color:#fff}.totais-admin{margin-top:10px;padding:11px 12px;background:var(--fundo-suave);border-radius:13px;line-height:1.65;font-size:.87rem}.vazio-admin{padding:30px 10px;text-align:center;color:var(--cinza)}
+    @media (max-width: 620px) {
+      .barra-topo { min-height: 66px; padding: 10px 15px; }
+      .admin { width: 45px; height: 45px; }
+      .hero { min-height: calc(100vh - 66px); padding-top: 32px; }
+      .acoes { width: 100%; }
+      .botao { width: 100%; }
+      .campos { grid-template-columns: 1fr; }
+      .campo.full { grid-column: auto; }
+      .painel { border-radius: 20px; }
+      .opcao label { grid-template-columns: 66px 1fr 24px; padding: 12px; }
+      .mini-quadra { width: 66px; height: 44px; }
+      .admin-layout{grid-template-columns:1fr}.dia-calendario{min-height:62px;padding:5px}.contador-jogos{font-size:.58rem;padding:3px 5px}.valor-locacao{align-items:flex-start}
+    }
+  </style>
 </head>
 <body>
-<div class="container topbar"><button class="admin-open" id="openAdmin">⚙ Administração</button></div>
-<header class="hero">
-  <div class="container">
-    <div class="logo-badge"><span class="ball">⚽</span><b>DOTTA</b><small>GINÁSIO DE ESPORTES</small></div>
-    <h1>Reserve. Jogue.<br><span>Viva o lance.</span></h1>
-    <p class="subtitle">Seu próximo jogo começa aqui.</p>
-    <a class="btn btn-red" href="#reserva">Reservar agora</a>
-    <a class="btn btn-outline" href="#lances">Seus lances</a>
-  </div>
-</header>
+  <div class="decoracao topo-esquerdo"></div>
+  <div class="decoracao topo-direito"></div>
+  <div class="decoracao base-esquerda"></div>
 
-<main>
-<section class="section" id="reserva">
-<div class="container">
-  <div class="section-head"><h2>Reserve sua quadra</h2><p>Escolha a modalidade, o dia e o horário.</p></div>
-  <form class="booking-card" id="bookingForm">
-    <div class="modes">
-      <button type="button" class="mode active" data-mode="Society"><span class="court">🟩</span><strong>Society</strong><small>Campo sintético</small></button>
-      <button type="button" class="mode" data-mode="Futsal"><span class="court">🟫</span><strong>Futsal</strong><small>Quadra coberta</small></button>
-    </div>
-    <div class="form-grid">
-      <div class="field"><label>Dia</label><input id="date" type="date" required></div>
-      <div class="field"><label>Horário</label><select id="time" required><option value="">Selecione</option><option>18:00</option><option>19:00</option><option>20:00</option><option>21:00</option><option>22:00</option><option>23:00</option></select></div>
-      <div class="field"><label>Nome do responsável</label><input id="responsible" required placeholder="Seu nome"></div>
-      <div class="field"><label>WhatsApp</label><input id="phone" required placeholder="(51) 99999-9999"></div>
-    </div>
-    <div class="price-box"><div><b>Valor da locação</b><small>* Cancelamento até 48h antes.</small></div><strong>R$ 140</strong></div>
-    <div class="players-box">
-      <button type="button" class="mini-btn add" id="togglePlayers">＋ Adicionar quem vai jogar</button>
-      <div id="playersArea" class="hidden">
-        <div class="players-list" id="playersList"></div>
-        <button type="button" class="mini-btn add" id="addPlayer">＋ Outro jogador</button>
-        <p class="notice">Cada jogador será calculado no painel por R$ 15,00.</p>
+  <header class="barra-topo">
+    <button class="admin" type="button" title="Área administrativa" aria-label="Área administrativa" onclick="abrirModal('modalAdmin')">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M19.4 13.1c.05-.36.08-.73.08-1.1 0-.38-.03-.75-.09-1.11l2.03-1.59-1.92-3.32-2.38.96a7.55 7.55 0 0 0-1.91-1.1L14.85 3.3h-3.84l-.36 2.54c-.69.26-1.33.63-1.91 1.1l-2.38-.96L4.44 9.3l2.03 1.59c-.06.36-.09.73-.09 1.11 0 .37.03.74.08 1.1l-2.02 1.6 1.92 3.32 2.38-.96c.58.47 1.22.84 1.91 1.1l.36 2.54h3.84l.36-2.54a7.5 7.5 0 0 0 1.91-1.1l2.38.96 1.92-3.32-2.02-1.6Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <img class="logo" src="logo-dotta.png" alt="Dotta Ginásio de Esportes" />
+
+      <h1 class="chamada">Reserve. Jogue.<br><em>Viva o lance.</em></h1>
+
+      <p class="subtitulo">Reserve seu horário e escolha sua modalidade em poucos toques.</p>
+
+      <div class="acoes">
+        <a class="botao vermelho" href="#reserva">Reservar agora</a>
+        <button class="botao vermelho" type="button" onclick="abrirModal('modalServicos')">Serviços</button>
+      </div>
+
+      <div class="seta-baixo" aria-hidden="true">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+          <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </section>
+
+    <section class="secao" id="reserva">
+      <div class="titulo-secao">
+        <span>Agendamento</span>
+        <h2>Reserve seu horário</h2>
+        <p>Escolha a quadra, o dia e o horário em que deseja jogar.</p>
+      </div>
+
+      <form class="painel" id="formReserva" novalidate>
+        <div class="etapa">
+          <span class="rotulo">Escolha a modalidade</span>
+
+          <div class="opcoes-quadra">
+            <div class="opcao">
+              <input type="radio" id="society" name="modalidade" value="Society">
+              <label for="society">
+                <span class="mini-quadra society" aria-hidden="true"></span>
+                <span class="nome-opcao">
+                  <strong>Society</strong>
+                  <small>Campo sintético</small>
+                </span>
+                <span class="radio-visual" aria-hidden="true"></span>
+              </label>
+            </div>
+
+            <div class="opcao">
+              <input type="radio" id="futsal" name="modalidade" value="Futsal">
+              <label for="futsal">
+                <span class="mini-quadra futsal" aria-hidden="true"></span>
+                <span class="nome-opcao">
+                  <strong>Futsal</strong>
+                  <small>Quadra coberta</small>
+                </span>
+                <span class="radio-visual" aria-hidden="true"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="etapa campos">
+          <div class="campo">
+            <label for="data">Escolha o dia</label>
+            <input id="data" name="data" type="date">
+          </div>
+
+          <div class="campo">
+            <label for="horario">Escolha o horário</label>
+            <select id="horario" name="horario">
+              <option value="">Selecione</option>
+              <option>18:00</option>
+              <option>19:00</option>
+              <option>20:00</option>
+              <option>21:00</option>
+              <option>22:00</option>
+              <option>23:00</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="nome">Nome</label>
+            <input id="nome" name="nome" type="text" placeholder="Seu nome completo" autocomplete="name">
+          </div>
+
+          <div class="campo">
+            <label for="telefone">Telefone</label>
+            <input id="telefone" name="telefone" type="tel" placeholder="(51) 99999-9999" autocomplete="tel">
+          </div>
+
+          <div class="campo full valor-locacao">
+            <div><strong>Valor da locação</strong><small>* Cancelamento até 48h antes.</small></div>
+            <b>R$ 140,00</b>
+          </div>
+
+          <div class="campo full jogadores-publico">
+            <button class="botao-jogadores" type="button" id="toggleJogadores">＋ Adicionar quem vai jogar</button>
+            <div id="areaJogadores" class="area-jogadores oculto">
+              <div id="listaJogadores"></div>
+              <button class="adicionar-jogador" type="button" id="adicionarJogador">＋ Adicionar outro jogador</button>
+              <small>Cada jogador será calculado em R$ 15,00 na área administrativa.</small>
+            </div>
+          </div>
+        </div>
+
+        <button class="botao vermelho confirmar" type="submit">Confirmar reserva</button>
+        <div class="aviso" id="avisoFormulario">Preencha a modalidade, o dia, o horário, o nome e o telefone.</div>
+      </form>
+    </section>
+
+    <section class="secao lances">
+      <h2>Seus lances</h2>
+      <p>Reviva os melhores momentos da sua partida e acesse as gravações dos jogos do Dotta.</p>
+      <a class="botao" href="https://gravajogo.com.br/parceiros/dotta" target="_blank" rel="noopener noreferrer">
+        Ver gravações dos jogos
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="ano"></span> Dotta Ginásio de Esportes
+  </footer>
+
+  <div class="modal-fundo" id="modalServicos" role="dialog" aria-modal="true" aria-labelledby="tituloServicos" onclick="fecharAoFundo(event, 'modalServicos')">
+    <div class="modal">
+      <div class="modal-topo">
+        <h3 id="tituloServicos">Serviços</h3>
+        <button class="fechar" type="button" aria-label="Fechar" onclick="fecharModal('modalServicos')">✕</button>
+      </div>
+
+      <div class="lista-servicos">
+        <div class="servico">
+          <div class="servico-icone">⚽</div>
+          <div><strong>Quadra Society</strong><small>Campo sintético para sua partida.</small></div>
+        </div>
+        <div class="servico">
+          <div class="servico-icone">🥅</div>
+          <div><strong>Quadra Futsal</strong><small>Quadra coberta para jogos de futsal.</small></div>
+        </div>
+        <div class="servico">
+          <div class="servico-icone">🔥</div>
+          <div><strong>Churrasqueira</strong><small>Espaço para reunir a equipe após o jogo.</small></div>
+        </div>
+        <div class="servico">
+          <div class="servico-icone">🍻</div>
+          <div><strong>Bar</strong><small>Bebidas e conveniência no local.</small></div>
+        </div>
       </div>
     </div>
-    <button class="btn btn-red submit" type="submit">Confirmar reserva</button>
-  </form>
-</div>
-</section>
-<section class="section" id="lances"><div class="container"><div class="lances"><div><h2>Seus lances</h2><p>Assista às gravações dos jogos.</p></div><a class="btn btn-red" href="https://gravajogo.com.br/parceiros/dotta" target="_blank">Acessar agora</a></div></div></section>
-</main>
-
-<a class="whatsapp" href="#" onclick="alert('O WhatsApp do Dotta será adicionado depois.');return false" aria-label="WhatsApp">◉</a>
-
-<dialog id="adminDialog">
-<div class="modal-inner">
-<button class="close" id="closeAdmin">×</button>
-<div id="loginScreen" class="login">
-  <div class="logo-badge" style="width:105px;height:105px"><span>⚽</span><b style="font-size:22px">DOTTA</b></div>
-  <h2>Área administrativa</h2><p>Digite a senha para acessar.</p>
-  <input type="password" id="adminPassword" placeholder="Senha">
-  <button class="btn btn-red submit" id="loginBtn">Entrar</button>
-  <p id="loginError" style="color:var(--red)"></p>
-</div>
-<div id="adminPanel" class="hidden">
-  <h2 class="admin-title">Painel administrativo</h2>
-  <div class="admin-layout">
-    <section class="calendar-card">
-      <div class="calendar-head"><button id="prevMonth">‹</button><h3 id="monthTitle"></h3><button id="nextMonth">›</button></div>
-      <div class="week"><div>DOM</div><div>SEG</div><div>TER</div><div>QUA</div><div>QUI</div><div>SEX</div><div>SÁB</div></div>
-      <div class="calendar-grid" id="calendar"></div>
-    </section>
-    <section class="admin-card">
-      <h3 id="selectedTitle">Jogos do dia</h3>
-      <div id="dayReservations" class="empty">Clique em um dia do calendário.</div>
-    </section>
   </div>
-</div>
-</div>
-</dialog>
 
-<script>
-const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-const STORAGE='dotta_reservas_v1';
-let mode='Society', calendarDate=new Date(), selectedDate=null;
-const money=v=>v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-const getBookings=()=>JSON.parse(localStorage.getItem(STORAGE)||'[]');
-const saveBookings=b=>localStorage.setItem(STORAGE,JSON.stringify(b));
-document.querySelectorAll('.mode').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('.mode').forEach(x=>x.classList.remove('active'));btn.classList.add('active');mode=btn.dataset.mode});
-function addPlayerInput(){
- const row=document.createElement('div'); row.className='player-entry';
- row.innerHTML='<input class="player-name" placeholder="Nome do jogador"><button type="button" class="mini-btn remove">×</button>';
- row.querySelector('.remove').onclick=()=>row.remove(); $('#playersList').appendChild(row);
-}
-$('#togglePlayers').onclick=()=>{ $('#playersArea').classList.toggle('hidden'); if(!$('.player-name')) addPlayerInput(); };
-$('#addPlayer').onclick=addPlayerInput;
-$('#bookingForm').onsubmit=e=>{
- e.preventDefault();
- const players=[...document.querySelectorAll('.player-name')].map(x=>x.value.trim()).filter(Boolean).map(name=>({name,paid:false}));
- const booking={id:Date.now(),date:$('#date').value,time:$('#time').value,mode,responsible:$('#responsible').value.trim(),phone:$('#phone').value.trim(),players,vests:false,ball:false,alert:false};
- const all=getBookings();
- if(all.some(x=>x.date===booking.date&&x.time===booking.time&&x.mode===booking.mode)){alert('Este horário já está reservado para essa modalidade.');return}
- all.push(booking);saveBookings(all);alert('Reserva salva! Ela já aparece na área administrativa.');e.target.reset();mode='Society';$$('.mode').forEach((x,i)=>x.classList.toggle('active',i===0));$('#playersList').innerHTML='';$('#playersArea').classList.add('hidden');renderCalendar();
-};
-$('#openAdmin').onclick=()=>$('#adminDialog').showModal(); $('#closeAdmin').onclick=()=>$('#adminDialog').close();
-$('#loginBtn').onclick=()=>{if($('#adminPassword').value==='210898'){$('#loginScreen').classList.add('hidden');$('#adminPanel').classList.remove('hidden');renderCalendar()}else $('#loginError').textContent='Senha incorreta.'};
-function ymd(d){return d.toISOString().slice(0,10)}
-function renderCalendar(){
- const cal=$('#calendar');cal.innerHTML='';
- const year=calendarDate.getFullYear(),month=calendarDate.getMonth();
- $('#monthTitle').textContent=new Intl.DateTimeFormat('pt-BR',{month:'long',year:'numeric'}).format(new Date(year,month,1));
- const first=new Date(year,month,1),start=new Date(year,month,1-first.getDay());
- const all=getBookings();
- for(let i=0;i<42;i++){
-  const d=new Date(start);d.setDate(start.getDate()+i);const key=ymd(d);const count=all.filter(x=>x.date===key).length;
-  const b=document.createElement('button');b.className='day'+(d.getMonth()!==month?' other':'')+(key===ymd(new Date())?' today':'')+(key===selectedDate?' selected':'');
-  b.innerHTML='<span class="day-number">'+d.getDate()+'</span>'+(count?'<span class="game-count">'+count+' jogo'+(count>1?'s':'')+'</span>':'');
-  b.onclick=()=>{selectedDate=key;renderCalendar();renderDay(key)};cal.appendChild(b);
- }
-}
-function updateBooking(id,fn){const all=getBookings();const x=all.find(b=>b.id===id);if(x){fn(x);saveBookings(all);renderCalendar();renderDay(selectedDate)}}
-function renderDay(date){
- const list=getBookings().filter(x=>x.date===date).sort((a,b)=>a.time.localeCompare(b.time));
- $('#selectedTitle').textContent='Jogos de '+new Date(date+'T12:00:00').toLocaleDateString('pt-BR');
- const box=$('#dayReservations');if(!list.length){box.className='empty';box.textContent='Nenhum jogo marcado neste dia.';return}box.className='';box.innerHTML='';
- let dayReceived=0;
- list.forEach(b=>{
-  const paid=b.players.filter(p=>p.paid).length;dayReceived+=paid*15;
-  const div=document.createElement('article');div.className='reservation';
-  div.innerHTML=`<h4>${b.time} • ${b.mode}</h4><div class="meta">${b.responsible} • ${b.phone}</div>
-  <span class="tag">Locação: R$ 140,00</span>${b.players.length?`<span class="tag">${b.players.length} jogadores</span>`:'<span class="tag">Jogadores não informados</span>'}
-  <div class="materials"><button class="check-btn ${b.vests?'on':''}" data-act="vest">✓ Coletes</button><button class="check-btn ${b.ball?'on':''}" data-act="ball">✓ Bola</button></div>
-  ${b.players.length?`<div class="pay-list">${b.players.map((p,i)=>`<div class="pay-row"><span>${p.name} — R$ 15,00</span><button class="paid-mark ${p.paid?'on':''}" data-pay="${i}">${p.paid?'✓':'+'}</button></div>`).join('')}</div>
-  <div class="totals">Previsto: <b>${money(b.players.length*15)}</b><br>Recebido: <b>${money(paid*15)}</b><br>Pendente: <b>${money((b.players.length-paid)*15)}</b></div>`:''}
-  <button class="mini-btn alert-btn ${b.alert?'alerted':''}" data-act="alert">⚠ ${b.alert?'Alerta ativo':'Marcar cancelamento fora do prazo'}</button>`;
-  div.querySelector('[data-act="vest"]').onclick=()=>updateBooking(b.id,x=>x.vests=!x.vests);
-  div.querySelector('[data-act="ball"]').onclick=()=>updateBooking(b.id,x=>x.ball=!x.ball);
-  div.querySelector('[data-act="alert"]').onclick=()=>updateBooking(b.id,x=>x.alert=!x.alert);
-  div.querySelectorAll('[data-pay]').forEach(btn=>btn.onclick=()=>updateBooking(b.id,x=>x.players[+btn.dataset.pay].paid=!x.players[+btn.dataset.pay].paid));
-  box.appendChild(div);
- });
- const total=document.createElement('div');total.className='totals';total.innerHTML='Total recebido dos jogadores no dia: <b>'+money(dayReceived)+'</b>';box.appendChild(total);
-}
-$('#prevMonth').onclick=()=>{calendarDate.setMonth(calendarDate.getMonth()-1);renderCalendar()};$('#nextMonth').onclick=()=>{calendarDate.setMonth(calendarDate.getMonth()+1);renderCalendar()};
-$('#date').min=ymd(new Date());renderCalendar();
-</script>
+  <div class="modal-fundo" id="modalSucesso" role="dialog" aria-modal="true" aria-labelledby="tituloSucesso" onclick="fecharAoFundo(event, 'modalSucesso')">
+    <div class="modal" style="text-align:center">
+      <div class="servico-icone" style="margin:0 auto 14px;background:#eef8f1;font-size:1.6rem">✓</div>
+      <h3 id="tituloSucesso">Reserva registrada</h3>
+      <p style="color:#70798a;line-height:1.6">A reserva foi salva e já aparece no calendário da área administrativa deste navegador.</p>
+      <button class="botao vermelho" style="width:100%;margin-top:10px" type="button" onclick="fecharModal('modalSucesso')">Entendi</button>
+    </div>
+  </div>
+
+
+  <a class="whatsapp-flutuante" href="#" aria-label="WhatsApp" onclick="alert('O número do WhatsApp do Dotta será adicionado depois.');return false">◉</a>
+
+  <div class="modal-fundo" id="modalAdmin" role="dialog" aria-modal="true" onclick="fecharAoFundo(event, 'modalAdmin')">
+    <div class="modal admin-modal">
+      <div class="modal-topo"><h3>Área administrativa</h3><button class="fechar" type="button" onclick="fecharModal('modalAdmin')">✕</button></div>
+      <div id="adminLogin" class="admin-login">
+        <img src="logo-dotta.png" class="logo-admin" alt="Dotta">
+        <p style="color:var(--cinza)">Digite a senha para acessar.</p>
+        <div class="campo"><input id="senhaAdmin" type="password" placeholder="Senha"></div>
+        <button id="entrarAdmin" class="botao vermelho" style="width:100%;margin-top:12px" type="button">Entrar</button>
+        <div class="aviso" id="erroSenha">Senha incorreta.</div>
+      </div>
+      <div id="painelAdmin" class="oculto">
+        <div class="admin-layout">
+          <section class="calendario-box">
+            <div class="calendario-topo"><button id="mesAnterior" type="button">‹</button><h4 id="tituloMes"></h4><button id="proximoMes" type="button">›</button></div>
+            <div class="semana"><span>DOM</span><span>SEG</span><span>TER</span><span>QUA</span><span>QUI</span><span>SEX</span><span>SÁB</span></div>
+            <div class="grade-calendario" id="gradeCalendario"></div>
+          </section>
+          <section class="reservas-box"><h4 id="tituloReservas" style="margin:0;color:var(--azul)">Jogos do dia</h4><div id="reservasDia" class="vazio-admin">Clique em um dia do calendário.</div></section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE = "dotta_reservas_v2";
+    const hoje = new Date();
+    const pad = n => String(n).padStart(2,"0");
+    const ymdLocal = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+    document.getElementById("data").min = ymdLocal(hoje);
+    document.getElementById("ano").textContent = hoje.getFullYear();
+    const lerReservas = () => JSON.parse(localStorage.getItem(STORAGE) || "[]");
+    const salvarReservas = lista => localStorage.setItem(STORAGE, JSON.stringify(lista));
+    const moeda = v => v.toLocaleString("pt-BR", {style:"currency",currency:"BRL"});
+    let mesCalendario = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
+    let dataSelecionada = null;
+
+    function abrirModal(id) { document.getElementById(id).classList.add("aberto"); document.body.style.overflow = "hidden"; }
+    function fecharModal(id) { document.getElementById(id).classList.remove("aberto"); document.body.style.overflow = ""; }
+    function fecharAoFundo(event, id) { if (event.target.id === id) fecharModal(id); }
+    document.addEventListener("keydown", e => { if(e.key === "Escape"){ document.querySelectorAll(".modal-fundo.aberto").forEach(m=>m.classList.remove("aberto")); document.body.style.overflow=""; } });
+
+    document.getElementById("telefone").addEventListener("input", function() {
+      let valor=this.value.replace(/\D/g,"").slice(0,11);
+      if(valor.length>10) valor=valor.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+      else if(valor.length>6) valor=valor.replace(/^(\d{2})(\d{4})(\d+)/, "($1) $2-$3");
+      else if(valor.length>2) valor=valor.replace(/^(\d{2})(\d+)/, "($1) $2");
+      else if(valor.length) valor=valor.replace(/^(\d*)/, "($1");
+      this.value=valor;
+    });
+
+    function criarCampoJogador(){
+      const linha=document.createElement("div"); linha.className="linha-jogador";
+      linha.innerHTML='<input class="nome-jogador" type="text" placeholder="Nome do jogador"><button class="remover-jogador" type="button">✕</button>';
+      linha.querySelector("button").onclick=()=>linha.remove(); document.getElementById("listaJogadores").appendChild(linha);
+    }
+    document.getElementById("toggleJogadores").onclick=()=>{ const area=document.getElementById("areaJogadores"); area.classList.toggle("oculto"); if(!document.querySelector(".nome-jogador")) criarCampoJogador(); };
+    document.getElementById("adicionarJogador").onclick=criarCampoJogador;
+
+    document.getElementById("formReserva").addEventListener("submit", function(event){
+      event.preventDefault();
+      const modalidade=document.querySelector('input[name="modalidade"]:checked');
+      const data=document.getElementById("data").value, horario=document.getElementById("horario").value;
+      const nome=document.getElementById("nome").value.trim(), telefone=document.getElementById("telefone").value.trim();
+      const aviso=document.getElementById("avisoFormulario");
+      if(!modalidade || !data || !horario || !nome || telefone.length<14){ aviso.classList.add("visivel"); return; }
+      const jogadores=[...document.querySelectorAll(".nome-jogador")].map(i=>i.value.trim()).filter(Boolean).map(nome=>({nome,pago:false}));
+      const lista=lerReservas();
+      if(lista.some(r=>r.data===data && r.horario===horario && r.modalidade===modalidade.value)){ aviso.textContent="Este horário já está reservado para essa modalidade."; aviso.classList.add("visivel"); return; }
+      lista.push({id:Date.now(),modalidade:modalidade.value,data,horario,nome,telefone,jogadores,coletes:false,bola:false,alerta:false});
+      salvarReservas(lista); aviso.classList.remove("visivel"); abrirModal("modalSucesso"); this.reset(); document.getElementById("listaJogadores").innerHTML=""; document.getElementById("areaJogadores").classList.add("oculto"); renderizarCalendario();
+    });
+
+    document.getElementById("entrarAdmin").onclick=()=>{
+      if(document.getElementById("senhaAdmin").value === "210898"){
+        document.getElementById("adminLogin").classList.add("oculto"); document.getElementById("painelAdmin").classList.remove("oculto"); document.getElementById("erroSenha").classList.remove("visivel"); renderizarCalendario();
+      } else document.getElementById("erroSenha").classList.add("visivel");
+    };
+    document.getElementById("mesAnterior").onclick=()=>{ mesCalendario.setMonth(mesCalendario.getMonth()-1); renderizarCalendario(); };
+    document.getElementById("proximoMes").onclick=()=>{ mesCalendario.setMonth(mesCalendario.getMonth()+1); renderizarCalendario(); };
+
+    function atualizarReserva(id, alteracao){ const lista=lerReservas(); const reserva=lista.find(r=>r.id===id); if(reserva){ alteracao(reserva); salvarReservas(lista); renderizarCalendario(); if(dataSelecionada) renderizarReservas(dataSelecionada); } }
+    function renderizarCalendario(){
+      const grade=document.getElementById("gradeCalendario"); grade.innerHTML="";
+      const ano=mesCalendario.getFullYear(), mes=mesCalendario.getMonth();
+      document.getElementById("tituloMes").textContent=new Intl.DateTimeFormat("pt-BR",{month:"long",year:"numeric"}).format(new Date(ano,mes,1));
+      const primeiro=new Date(ano,mes,1), inicio=new Date(ano,mes,1-primeiro.getDay()), reservas=lerReservas();
+      for(let i=0;i<42;i++){
+        const d=new Date(inicio); d.setDate(inicio.getDate()+i); const chave=ymdLocal(d); const qtd=reservas.filter(r=>r.data===chave).length;
+        const botao=document.createElement("button"); botao.type="button"; botao.className="dia-calendario"+(d.getMonth()!==mes?" fora":"")+(chave===ymdLocal(hoje)?" hoje":"")+(chave===dataSelecionada?" selecionado":"");
+        botao.innerHTML=`<span class="numero-dia">${d.getDate()}</span>${qtd?`<span class="contador-jogos">${qtd} jogo${qtd>1?"s":""}</span>`:""}`;
+        botao.onclick=()=>{ dataSelecionada=chave; renderizarCalendario(); renderizarReservas(chave); }; grade.appendChild(botao);
+      }
+    }
+    function renderizarReservas(data){
+      const box=document.getElementById("reservasDia"), lista=lerReservas().filter(r=>r.data===data).sort((a,b)=>a.horario.localeCompare(b.horario));
+      document.getElementById("tituloReservas").textContent="Jogos de "+new Date(data+"T12:00:00").toLocaleDateString("pt-BR");
+      if(!lista.length){ box.className="vazio-admin"; box.textContent="Nenhum jogo marcado neste dia."; return; }
+      box.className=""; box.innerHTML=""; let totalDia=0;
+      lista.forEach(r=>{
+        const pagos=r.jogadores.filter(j=>j.pago).length; totalDia += pagos*15;
+        const card=document.createElement("article"); card.className="reserva-admin";
+        card.innerHTML=`<h5>${r.horario} • ${r.modalidade}</h5><div class="meta-admin">${r.nome} • ${r.telefone}</div><span class="tag-admin">Locação: R$ 140,00</span>${r.jogadores.length?`<span class="tag-admin">${r.jogadores.length} jogadores</span>`:'<span class="tag-admin">Jogadores não informados</span>'}<div class="materiais"><button class="check-material ${r.coletes?'ativo':''}" data-coletes>✓ Coletes</button><button class="check-material ${r.bola?'ativo':''}" data-bola>✓ Bola</button></div>${r.jogadores.length?`<div>${r.jogadores.map((j,i)=>`<div class="pagamento-linha"><span>${j.nome} — R$ 15,00</span><button class="pago-btn ${j.pago?'ativo':''}" data-pago="${i}">${j.pago?'✓':'+'}</button></div>`).join('')}</div><div class="totais-admin">Previsto: <b>${moeda(r.jogadores.length*15)}</b><br>Recebido: <b>${moeda(pagos*15)}</b><br>Pendente: <b>${moeda((r.jogadores.length-pagos)*15)}</b></div>`:''}<button class="alerta-cliente ${r.alerta?'ativo':''}" data-alerta>⚠ ${r.alerta?'Atenção ativa':'Marcar cancelamento fora do prazo'}</button>`;
+        card.querySelector('[data-coletes]').onclick=()=>atualizarReserva(r.id,x=>x.coletes=!x.coletes); card.querySelector('[data-bola]').onclick=()=>atualizarReserva(r.id,x=>x.bola=!x.bola); card.querySelector('[data-alerta]').onclick=()=>atualizarReserva(r.id,x=>x.alerta=!x.alerta);
+        card.querySelectorAll('[data-pago]').forEach(b=>b.onclick=()=>atualizarReserva(r.id,x=>x.jogadores[Number(b.dataset.pago)].pago=!x.jogadores[Number(b.dataset.pago)].pago)); box.appendChild(card);
+      });
+      const total=document.createElement("div"); total.className="totais-admin"; total.innerHTML=`Total recebido dos jogadores no dia: <b>${moeda(totalDia)}</b>`; box.appendChild(total);
+    }
+    renderizarCalendario();
+  </script>
 </body>
 </html>
