@@ -1,11 +1,8 @@
-NOVA VERSÃO DOTTA — FUNDO BRANCO
+Protótipo inicial do novo site do Dotta.
 
-Principais mudanças:
-- Fundo branco em todo o site.
-- Visual mais profissional e esportivo.
-- Tipografia forte e moderna.
-- Cards separados para Society e Futsal.
-- Reserva abre em uma nova tela.
-- Agenda com horários livres, reservados e mensalistas.
-- Botão discreto para a área administrativa.
-- Área para o link das gravações dos lances.
+Próximas melhorias:
+- Inserir logo oficial.
+- Área administrativa.
+- Agenda integrada.
+- Banco de dados.
+- Disponibilidade em tempo real.
