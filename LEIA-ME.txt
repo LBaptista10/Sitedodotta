@@ -1,17 +1,11 @@
-PROTÓTIPO DOTTA SPORTS — PROJETO CAMISA 10
+NOVA VERSÃO VISUAL DO SITE DOTTA
 
-Como abrir:
-1. Extraia o arquivo ZIP.
-2. Abra o arquivo index.html no navegador.
-
-O protótipo inclui:
-- Fundo branco e cores inspiradas na logo.
-- Society e Futsal.
-- Horários fixos de uma hora.
-- Horários reservados e mensalistas.
-- Simulação de reserva.
-- Área para link das gravações.
-- Prévia do painel de mensalistas.
-
-Observação:
-O botão de gravações ainda está com link demonstrativo. Depois basta substituir o href pelo link oficial.
+Alterações:
+- Página muito mais simples.
+- Fundo azul com detalhes vermelhos.
+- Cabeçalho somente com a logo.
+- Frase principal: "reserve, jogue e viva o lance".
+- Apenas um botão de reserva.
+- Botão discreto de área administrativa no canto superior direito.
+- Modal simples para escolher Society ou Futsal.
+- Letras mais despojadas.
