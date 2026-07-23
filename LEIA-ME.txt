@@ -1,0 +1,17 @@
+PROTÓTIPO DOTTA SPORTS — PROJETO CAMISA 10
+
+Como abrir:
+1. Extraia o arquivo ZIP.
+2. Abra o arquivo index.html no navegador.
+
+O protótipo inclui:
+- Fundo branco e cores inspiradas na logo.
+- Society e Futsal.
+- Horários fixos de uma hora.
+- Horários reservados e mensalistas.
+- Simulação de reserva.
+- Área para link das gravações.
+- Prévia do painel de mensalistas.
+
+Observação:
+O botão de gravações ainda está com link demonstrativo. Depois basta substituir o href pelo link oficial.
